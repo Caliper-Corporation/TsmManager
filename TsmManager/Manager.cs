@@ -23,12 +23,12 @@ namespace TsmManager
         //For interaction with TransModeler GISDK API
         private dynamic runManager;
         
-        private readonly Process tsmProcess;
+        private Process tsmProcess;
         public bool Open()
         {
             try
             {
-                var tsmProcess = new Process();
+                tsmProcess = new Process();
                 tsmProcess.StartInfo.FileName = productPath;
                 tsmProcess.StartInfo.Arguments = project;
                 tsmProcess.Start();
@@ -76,7 +76,7 @@ namespace TsmManager
             }
             runManager.SuppressAllWarnings();
             runManager.SetSimulationRunMode("Simulation");
-            var t = Task.Run(() => runManager.RunSimulation());
+            Task.Run(() => runManager.RunSimulation());
         }
 
         public bool ChangeSettings()
@@ -100,6 +100,7 @@ namespace TsmManager
         {
             connection?.Close(); //Closes the connection. If transmodeler was running before, it will keep it running.
             connection?.Terminate(); //kills the product exe process if it was opened during connection setup as a background process
+            tsmProcess?.CloseMainWindow();
         }
     }
 }
