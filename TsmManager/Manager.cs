@@ -10,19 +10,20 @@ namespace TsmManager
     public class Manager
     {
         public static string logFile = "C:\\Temp\\transmodeler.txt";
-        //private string product = "TransModeler"; //for full version        
-        private string product = "TransModeler SE"; //for SE
-        //private const string productPath = "C:\\Program Files\\TransModeler 6.0\\tsm.exe";  //for full version
-        private const string productPath = "C:\\Program Files\\TransModeler SE 6.0\\TsmSE.exe"; //for SE
+        private string product = "TransModeler"; //for full version        
+        //private string product = "TransModeler SE"; //for SE
+        //private const string productPath = "C:\\Program Files\\TransModeler 6.0\\tsm.exe";  //for full version        
+        private const string productPath = "C:\\Platform\\TsmDev\\tsm.exe";  //for dev version
+        //private const string productPath = "C:\\Program Files\\TransModeler SE 6.0\\TsmSE.exe"; //for SE
         private const string project = "C:\\Temp\\SignalCoordination\\SignalCoordination.smp"; //project path for project of your choice, avoid spaces in filepath
-        
+
         //For interaction with CaliperForm.dll
         private CaliperForm.Connection connection;
         private dynamic dk;
-        
+
         //For interaction with TransModeler GISDK API
         private dynamic runManager;
-        
+
         private Process tsmProcess;
         public bool Open()
         {
@@ -33,7 +34,8 @@ namespace TsmManager
                 tsmProcess.StartInfo.Arguments = project;
                 tsmProcess.Start();
 
-                Thread.Sleep(2000);
+                Thread.Sleep(2000); //If the tsmProcess has not started yet, the connection code below will start a new process, 
+                //this 2 s delay ensures that the connection does not create a new process and attaches to the tsmProcess from above
 
                 connection = new CaliperForm.Connection { MappingServer = product };
                 bool opened = connection.Open(logFile);
@@ -45,8 +47,8 @@ namespace TsmManager
                     // Obtain information about connection: an array of [ "program_path" , "program name" , "program type" , build number (integer) , version number (real) , instance number ]
                     var programInfo = dk.GetProgram();
                     var programName = programInfo[1] as string;
-                    var buildNumber = (int) programInfo[3];
-                    var versionNumber = (double) programInfo[4];
+                    var buildNumber = (int)programInfo[3];
+                    var versionNumber = (double)programInfo[4];
 
                     dk.ShowMessage("Successfully conntected to " +
                         "Program name: " + programName + " Version number: " + versionNumber + " Build number: " + buildNumber);
@@ -69,7 +71,7 @@ namespace TsmManager
 
         public void Start()
         {
-            if(runManager == null)
+            if (runManager == null)
             {
                 dk.ShowMessage("Run Manager has no value assigned to it. Simulation can not be run.");
                 return;
@@ -84,18 +86,45 @@ namespace TsmManager
             //change project settings, output settings, getsignals, setsignals etc.
             return false;
         }
-        
+
         public void Stop()
         {
-            if (runManager == null)
-            {
-                dk.ShowMessage("Run Manager has no value assigned to it. Simulation can not be stopped.");
-                return;
-            }
-
-            runManager.StopSimulation();
+            runManager?.StopSimulation();
+            runManager?.TsmApi?.Reset();
         }
-        
+
+        public string Pause(string pause)
+        {
+            //if pause = "True" simulation is paused, else ("Flase") simulation is resumed.
+            return runManager?.PauseSimulation(pause);
+        }
+
+        public string EnterStepMode()
+        {
+            return runManager?.SetStepMode("True");
+        }
+
+        public void StepForward(int stepSize = 1)
+        {
+            //stepSize is the size in seconds of step for Step Mode simulation, default value is 1 second
+            runManager?.Step(stepSize);
+        }
+
+        public void SpeedUp()
+        {
+            runManager?.SpeedUpSimulation();
+        }
+
+        public void SlowDown()
+        {
+            runManager?.SlowDownSimulation();
+        }
+
+        public void RunTo(string time)
+        {
+            runManager?.TsmApi?.RunTo(time);
+        }
+
         public void Close()
         {
             connection?.Close(); //Closes the connection. If transmodeler was running before, it will keep it running.
