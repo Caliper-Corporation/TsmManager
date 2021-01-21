@@ -31,7 +31,7 @@ namespace TsmManager
         {
             this.openButton = new System.Windows.Forms.Button();
             this.runSimulationButton = new System.Windows.Forms.Button();
-            this.changeSettingsButton = new System.Windows.Forms.Button();
+            this.realTimeFactorButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.pauseButton = new System.Windows.Forms.Button();
@@ -68,18 +68,17 @@ namespace TsmManager
             this.runSimulationButton.UseVisualStyleBackColor = true;
             this.runSimulationButton.Click += new System.EventHandler(this.runSimulationButton_Click);
             // 
-            // changeSettingsButton
+            // realTimeFactorButton
             // 
-            this.changeSettingsButton.Enabled = false;
-            this.changeSettingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.changeSettingsButton.Location = new System.Drawing.Point(265, 105);
-            this.changeSettingsButton.Name = "changeSettingsButton";
-            this.changeSettingsButton.Size = new System.Drawing.Size(100, 30);
-            this.changeSettingsButton.TabIndex = 2;
-            this.changeSettingsButton.Text = "Change Settings";
-            this.changeSettingsButton.UseVisualStyleBackColor = true;
-            this.changeSettingsButton.Visible = false;
-            this.changeSettingsButton.Click += new System.EventHandler(this.changeSettingsButton_Click);
+            this.realTimeFactorButton.Enabled = false;
+            this.realTimeFactorButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.realTimeFactorButton.Location = new System.Drawing.Point(265, 105);
+            this.realTimeFactorButton.Name = "realTimeFactorButton";
+            this.realTimeFactorButton.Size = new System.Drawing.Size(100, 30);
+            this.realTimeFactorButton.TabIndex = 2;
+            this.realTimeFactorButton.Text = "Real-Time";
+            this.realTimeFactorButton.UseVisualStyleBackColor = true;
+            this.realTimeFactorButton.Click += new System.EventHandler(this.realTimeFactorButton_Click);
             // 
             // stopButton
             // 
@@ -170,7 +169,7 @@ namespace TsmManager
             this.groupBox1.Controls.Add(this.stepSizeTextBox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.speedUpButton);
-            this.groupBox1.Controls.Add(this.changeSettingsButton);
+            this.groupBox1.Controls.Add(this.realTimeFactorButton);
             this.groupBox1.Controls.Add(this.slowDownButton);
             this.groupBox1.Controls.Add(this.runSimulationButton);
             this.groupBox1.Controls.Add(this.stepForwardButton);
@@ -232,7 +231,7 @@ namespace TsmManager
 
         private System.Windows.Forms.Button openButton;
         private System.Windows.Forms.Button runSimulationButton;
-        private System.Windows.Forms.Button changeSettingsButton;
+        private System.Windows.Forms.Button realTimeFactorButton;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Button pauseButton;

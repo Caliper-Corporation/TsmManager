@@ -125,6 +125,11 @@ namespace TsmManager
             runManager?.TsmApi?.RunTo(time);
         }
 
+        public void SetTimeFactor(double factor = 1.0)
+        {
+            dk?.SetSimulationDesireSpeed(factor);
+        }
+
         public void Close()
         {
             connection?.Close(); //Closes the connection. If transmodeler was running before, it will keep it running.

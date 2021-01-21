@@ -44,12 +44,13 @@ namespace TsmManager
             runSimulationButton.Enabled = false;
             label1.Enabled = true;
             stepSizeTextBox.Enabled = true;
+            realTimeFactorButton.Enabled = true;
             MessageBox.Show("Simulation started!");
         }
 
-        private void changeSettingsButton_Click(object sender, EventArgs e)
+        private void realTimeFactorButton_Click(object sender, EventArgs e)
         {
-            manager.ChangeSettings();
+            manager.SetTimeFactor(1.0);
         }
 
         private void stopButton_Click(object sender, EventArgs e)
@@ -77,20 +78,21 @@ namespace TsmManager
 
         private void pauseButton_Click(object sender, EventArgs e)
         {
-            var status = string.Empty;
+            string status;
             if (!isPaused)
             {
                 isPaused = true;
                 pauseButton.Text = "Resume";
                 status = manager.Pause("True");
+                if (status.ToLower() == "true") MessageBox.Show("Simulation paused!");
             }
             else
             {
                 isPaused = false;
                 pauseButton.Text = "Pause";
                 status = manager.Pause("False");
+                if (status.ToLower() == "true") MessageBox.Show("Simulation resumed!");
             }
-            MessageBox.Show($"The status of pause simulation is {status}");
         }
 
         private void stepModeButton_Click(object sender, EventArgs e)
