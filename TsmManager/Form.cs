@@ -98,6 +98,10 @@ namespace TsmManager
         private void stepModeButton_Click(object sender, EventArgs e)
         {
             var status = manager.EnterStepMode();
+            pauseButton.Enabled = false;
+            speedUpButton.Enabled = false;
+            slowDownButton.Enabled = false;
+            realTimeFactorButton.Enabled = false;
             MessageBox.Show($"The staus of enter step mode is {status}");
         }
 
