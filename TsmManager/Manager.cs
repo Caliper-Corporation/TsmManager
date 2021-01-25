@@ -62,8 +62,8 @@ namespace TsmManager
                 var errorDetails = e.Message + "\nDetails:\n" + e.StackTrace;
                 if (dk != null) dk.ShowMessage(errorDetails);
                 else File.AppendAllText(logFile, errorDetails);
-                connection?.Close(); // Closes the connection. If transmodeler was running before, it will keep it running.
-                connection?.Terminate(); // kills the product exe process
+                connection.Close(); // Closes the connection. If transmodeler was running before, it will keep it running.
+                connection.Terminate(); // kills the product exe process
                 return false;
             }
             return true;
@@ -89,52 +89,51 @@ namespace TsmManager
 
         public void Stop()
         {
-            runManager?.StopSimulation();
-            runManager?.TsmApi?.Reset();
+            runManager.StopSimulation();
         }
 
         public string Pause(string pause)
         {
             //if pause = "True" simulation is paused, else ("Flase") simulation is resumed.
-            return runManager?.PauseSimulation(pause);
+            return runManager.PauseSimulation(pause);
         }
 
         public string EnterStepMode()
         {
-            return runManager?.SetStepMode("True");
+            return runManager.SetStepMode("True");
         }
 
         public void StepForward(int stepSize = 1)
         {
             //stepSize is the size in seconds of step for Step Mode simulation, default value is 1 second
-            runManager?.Step(stepSize);
+            runManager.Step(stepSize);
         }
 
         public void SpeedUp()
         {
-            runManager?.SpeedUpSimulation();
+            runManager.SpeedUpSimulation();
         }
 
         public void SlowDown()
         {
-            runManager?.SlowDownSimulation();
+            runManager.SlowDownSimulation();
         }
 
         public void RunTo(string time)
         {
-            runManager?.TsmApi?.RunTo(time);
+            runManager.TsmApi.RunTo(time);
         }
 
         public void SetTimeFactor(double factor = 1.0)
         {
-            dk?.SetSimulationDesireSpeed(factor);
+            dk.SetSimulationDesireSpeed(factor);
         }
 
         public void Close()
         {
-            connection?.Close(); //Closes the connection. If transmodeler was running before, it will keep it running.
-            connection?.Terminate(); //kills the product exe process if it was opened during connection setup as a background process
-            tsmProcess?.CloseMainWindow();
+            connection.Close(); //Closes the connection. If transmodeler was running before, it will keep it running.
+            connection.Terminate(); //kills the product exe process if it was opened during connection setup as a background process
+            tsmProcess.CloseMainWindow();
         }
     }
 }
