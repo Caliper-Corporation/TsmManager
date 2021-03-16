@@ -121,5 +121,13 @@ namespace TsmManager
         {
             manager.SlowDown();
         }
+
+        private void setSignalStateButton_Click(object sender, EventArgs e)
+        {
+            var sigId = int.Parse(signalIDTextBox.Text);
+            var turn = movementComboBox.SelectedIndex == 3 ? 2 : movementComboBox.SelectedIndex;
+            var color = colorComboBox.SelectedIndex == 0 ? "Green": colorComboBox.SelectedIndex == 1 ? "Yellow": "Red";
+            manager.SetSignalState(sigId, turn, color);
+        }
     }
 }

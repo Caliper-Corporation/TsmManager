@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CaliperForm;
+using Tsm;
 
 namespace TsmManager
 {
@@ -18,7 +20,7 @@ namespace TsmManager
         private const string project = "C:\\Temp\\SignalCoordination\\SignalCoordination.smp"; //project path for project of your choice, avoid spaces in filepath
 
         //For interaction with CaliperForm.dll
-        private CaliperForm.Connection connection;
+        private Connection connection;
         private dynamic dk;
 
         //For interaction with TransModeler GISDK API
@@ -37,7 +39,7 @@ namespace TsmManager
                 Thread.Sleep(2000); //If the tsmProcess has not started yet, the connection code below will start a new process, 
                 //this 2 s delay ensures that the connection does not create a new process and attaches to the tsmProcess from above
 
-                connection = new CaliperForm.Connection { MappingServer = product };
+                connection = new Connection { MappingServer = product };
                 bool opened = connection.Open(logFile);
                 if (opened)
                 {
@@ -81,12 +83,6 @@ namespace TsmManager
             Task.Run(() => runManager.RunSimulation());
         }
 
-        public bool ChangeSettings()
-        {
-            //change project settings, output settings, getsignals, setsignals etc.
-            return false;
-        }
-
         public void Stop()
         {
             runManager.StopSimulation();
@@ -101,6 +97,17 @@ namespace TsmManager
         public string EnterStepMode()
         {
             return runManager.SetStepMode("True");
+        }
+
+        public void SetSignalState(int sigId, int turn, string color)
+        {
+            var signal = runManager.TsmApi.Network.Signal[sigId];
+            TsmSignalState state;
+            if (color == "Green") state = TsmSignalState.GREEN_SIGNAL;
+            else if (color == "Yellow") state = TsmSignalState.YELLOW_SIGNAL;
+            else if (color == "Red") state = TsmSignalState.RED_SIGNAL;
+            else state = TsmSignalState.BLANK_SIGNAL;
+            signal.TurnSignalState[(short)turn] = state;
         }
 
         public void StepForward(int stepSize = 1)
