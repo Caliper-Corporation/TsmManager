@@ -129,5 +129,41 @@ namespace TsmManager
             var color = colorComboBox.SelectedIndex == 0 ? "Green": colorComboBox.SelectedIndex == 1 ? "Yellow": "Red";
             manager.SetSignalState(sigId, turn, color);
         }
+
+        private void getDetectorStatusButton_Click(object sender, EventArgs e)
+        {
+            var dt = DateTime.Now;
+            manager.OutputDetectorInformation(manager.GetTimeStamp(dt));
+            MessageBox.Show($"Detector information writing initiated at {dt}");
+        }
+
+        private void getVehicleStatusButton_Click(object sender, EventArgs e)
+        {
+            var dt = DateTime.Now;
+            //manager.OutputVehicleInformation(manager.GetTimeStamp(dt));
+            MessageBox.Show($"Vehicle information writing initiated at {dt}");
+        }
+
+        private void detectorIsActiveButton_Click(object sender, EventArgs e)
+        {
+            var sensorId = int.Parse(detectorIDTextBox.Text);
+            if(sensorId > 0)
+            {
+                var isActive = manager.IsSensorActive(sensorId);
+                var status = isActive ? "activated" : "not activated";
+                MessageBox.Show($"Detector id {sensorId} is currently {status}."); ;
+            }
+        }
+
+        private void detectorActivateButton_Click(object sender, EventArgs e)
+        {
+            var sensorId = int.Parse(detectorIDTextBox.Text);
+            if (sensorId > 0)
+            {
+                var activated = manager.ActivateSensor(sensorId);
+                var status = activated ? "has been successfully activated" : "could not be activated";
+                MessageBox.Show($"Detector id {sensorId} {status}."); ;
+            }
+        }
     }
 }

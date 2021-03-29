@@ -43,15 +43,25 @@ namespace TsmManager
             this.stepSizeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.signalIDTextBox = new System.Windows.Forms.TextBox();
+            this.setSignalStateButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.colorComboBox = new System.Windows.Forms.ComboBox();
             this.movementComboBox = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.setSignalStateButton = new System.Windows.Forms.Button();
+            this.signalIDTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.getVehicleStatusButton = new System.Windows.Forms.Button();
+            this.getDetectorStatusButton = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.detectorActivateButton = new System.Windows.Forms.Button();
+            this.detectorIDTextBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.detectorIsActiveButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // openButton
@@ -105,7 +115,7 @@ namespace TsmManager
             // 
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.closeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closeButton.Location = new System.Drawing.Point(111, 327);
+            this.closeButton.Location = new System.Drawing.Point(111, 475);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(200, 30);
             this.closeButton.TabIndex = 4;
@@ -185,7 +195,7 @@ namespace TsmManager
             this.groupBox1.Controls.Add(this.pauseButton);
             this.groupBox1.Controls.Add(this.stopButton);
             this.groupBox1.Controls.Add(this.stepModeButton);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(25, 56);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(378, 144);
@@ -224,7 +234,7 @@ namespace TsmManager
             this.groupBox2.Controls.Add(this.movementComboBox);
             this.groupBox2.Controls.Add(this.signalIDTextBox);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(24, 209);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(379, 100);
@@ -232,23 +242,36 @@ namespace TsmManager
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Signal";
             // 
-            // label2
+            // setSignalStateButton
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 31);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 16);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "ID";
+            this.setSignalStateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.setSignalStateButton.Location = new System.Drawing.Point(114, 61);
+            this.setSignalStateButton.Name = "setSignalStateButton";
+            this.setSignalStateButton.Size = new System.Drawing.Size(133, 30);
+            this.setSignalStateButton.TabIndex = 16;
+            this.setSignalStateButton.Text = "Set Signal State";
+            this.setSignalStateButton.UseVisualStyleBackColor = true;
+            this.setSignalStateButton.Click += new System.EventHandler(this.setSignalStateButton_Click);
             // 
-            // signalIDTextBox
+            // label4
             // 
-            this.signalIDTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signalIDTextBox.Location = new System.Drawing.Point(29, 28);
-            this.signalIDTextBox.Name = "signalIDTextBox";
-            this.signalIDTextBox.Size = new System.Drawing.Size(76, 22);
-            this.signalIDTextBox.TabIndex = 12;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(256, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 16);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Color";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(111, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 16);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Movement";
             // 
             // colorComboBox
             // 
@@ -278,36 +301,111 @@ namespace TsmManager
             this.movementComboBox.Size = new System.Drawing.Size(63, 24);
             this.movementComboBox.TabIndex = 13;
             // 
-            // label3
+            // signalIDTextBox
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(111, 30);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 16);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Movement";
+            this.signalIDTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.signalIDTextBox.Location = new System.Drawing.Point(29, 28);
+            this.signalIDTextBox.Name = "signalIDTextBox";
+            this.signalIDTextBox.Size = new System.Drawing.Size(76, 22);
+            this.signalIDTextBox.TabIndex = 12;
             // 
-            // label4
+            // label2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(256, 28);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 16);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Color";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(8, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(21, 16);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "ID";
             // 
-            // setSignalStateButton
+            // groupBox3
             // 
-            this.setSignalStateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.setSignalStateButton.Location = new System.Drawing.Point(114, 61);
-            this.setSignalStateButton.Name = "setSignalStateButton";
-            this.setSignalStateButton.Size = new System.Drawing.Size(133, 30);
-            this.setSignalStateButton.TabIndex = 16;
-            this.setSignalStateButton.Text = "Set Signal State";
-            this.setSignalStateButton.UseVisualStyleBackColor = true;
-            this.setSignalStateButton.Click += new System.EventHandler(this.setSignalStateButton_Click);
+            this.groupBox3.Controls.Add(this.getVehicleStatusButton);
+            this.groupBox3.Controls.Add(this.getDetectorStatusButton);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(25, 394);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(379, 75);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Output";
+            // 
+            // getVehicleStatusButton
+            // 
+            this.getVehicleStatusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.getVehicleStatusButton.Location = new System.Drawing.Point(187, 28);
+            this.getVehicleStatusButton.Name = "getVehicleStatusButton";
+            this.getVehicleStatusButton.Size = new System.Drawing.Size(178, 30);
+            this.getVehicleStatusButton.TabIndex = 17;
+            this.getVehicleStatusButton.Text = "Vehicles";
+            this.getVehicleStatusButton.UseVisualStyleBackColor = true;
+            this.getVehicleStatusButton.Click += new System.EventHandler(this.getVehicleStatusButton_Click);
+            // 
+            // getDetectorStatusButton
+            // 
+            this.getDetectorStatusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.getDetectorStatusButton.Location = new System.Drawing.Point(10, 28);
+            this.getDetectorStatusButton.Name = "getDetectorStatusButton";
+            this.getDetectorStatusButton.Size = new System.Drawing.Size(171, 30);
+            this.getDetectorStatusButton.TabIndex = 16;
+            this.getDetectorStatusButton.Text = "Detectors";
+            this.getDetectorStatusButton.UseVisualStyleBackColor = true;
+            this.getDetectorStatusButton.Click += new System.EventHandler(this.getDetectorStatusButton_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.detectorIsActiveButton);
+            this.groupBox4.Controls.Add(this.detectorActivateButton);
+            this.groupBox4.Controls.Add(this.detectorIDTextBox);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(24, 315);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(379, 73);
+            this.groupBox4.TabIndex = 13;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Detector";
+            // 
+            // detectorActivateButton
+            // 
+            this.detectorActivateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.detectorActivateButton.Location = new System.Drawing.Point(266, 23);
+            this.detectorActivateButton.Name = "detectorActivateButton";
+            this.detectorActivateButton.Size = new System.Drawing.Size(100, 30);
+            this.detectorActivateButton.TabIndex = 16;
+            this.detectorActivateButton.Text = "Activate";
+            this.detectorActivateButton.UseVisualStyleBackColor = true;
+            this.detectorActivateButton.Click += new System.EventHandler(this.detectorActivateButton_Click);
+            // 
+            // detectorIDTextBox
+            // 
+            this.detectorIDTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.detectorIDTextBox.Location = new System.Drawing.Point(29, 28);
+            this.detectorIDTextBox.Name = "detectorIDTextBox";
+            this.detectorIDTextBox.Size = new System.Drawing.Size(76, 22);
+            this.detectorIDTextBox.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(8, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(21, 16);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "ID";
+            // 
+            // detectorIsActiveButton
+            // 
+            this.detectorIsActiveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.detectorIsActiveButton.Location = new System.Drawing.Point(137, 24);
+            this.detectorIsActiveButton.Name = "detectorIsActiveButton";
+            this.detectorIsActiveButton.Size = new System.Drawing.Size(100, 30);
+            this.detectorIsActiveButton.TabIndex = 17;
+            this.detectorIsActiveButton.Text = "Is Active?";
+            this.detectorIsActiveButton.UseVisualStyleBackColor = true;
+            this.detectorIsActiveButton.Click += new System.EventHandler(this.detectorIsActiveButton_Click);
             // 
             // Form
             // 
@@ -316,7 +414,9 @@ namespace TsmManager
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.CancelButton = this.closeButton;
-            this.ClientSize = new System.Drawing.Size(419, 370);
+            this.ClientSize = new System.Drawing.Size(411, 513);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.openButton);
@@ -329,6 +429,9 @@ namespace TsmManager
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -356,6 +459,14 @@ namespace TsmManager
         private System.Windows.Forms.ComboBox movementComboBox;
         private System.Windows.Forms.TextBox signalIDTextBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button getVehicleStatusButton;
+        private System.Windows.Forms.Button getDetectorStatusButton;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button detectorIsActiveButton;
+        private System.Windows.Forms.Button detectorActivateButton;
+        private System.Windows.Forms.TextBox detectorIDTextBox;
+        private System.Windows.Forms.Label label7;
     }
 }
 

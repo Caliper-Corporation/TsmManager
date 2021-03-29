@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CaliperForm;
 using Tsm;
+using System.Text;
 
 namespace TsmManager
 {
@@ -108,6 +109,91 @@ namespace TsmManager
             else if (color == "Red") state = TsmSignalState.RED_SIGNAL;
             else state = TsmSignalState.BLANK_SIGNAL;
             signal.TurnSignalState[(short)turn] = state;
+        }
+
+        internal void OutputVehicleInformation(string timeStamp)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    var sb = new StringBuilder();
+                    var vehicles = runManager.TsmApi.Network.Vehicles;
+                    sb.AppendLine("Vehicle Id,Vehicle Class,Segment Id,Speed,Headway");
+                    foreach (var v in vehicles)
+                    {
+                        var speed = v.Speed > 0 ? v.Speed.ToString() : string.Empty;
+                        
+                        var line = $"{v.id},{v.Class},{v.Segment?.id},{speed},{v.Headway}";
+                        sb.AppendLine(line);
+                    }
+                    var filePath = $"Vehicles-{timeStamp}.csv";
+                    File.WriteAllText(filePath, sb.ToString());
+                    MessageBox.Show("Vehicle information written successfully!");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"An error occurred while writing vehicle information.\nDetails:{e.Message}");
+                }
+            });
+        }
+
+        public bool ActivateSensor(int sensorId)
+        {
+            if (runManager.TsmApi.Network.Sensor[sensorId] != null)
+            {
+                runManager.TsmApi.Network.Sensor[sensorId].IsActivated = true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsSensorActive(int sensorId)
+        {
+            if (runManager.TsmApi.Network.Sensor[sensorId] != null)
+            {
+                return runManager.TsmApi.Network.Sensor[sensorId].IsActivated;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal string GetTimeStamp(DateTime dt)
+        {
+            var timeStamp = $"{dt.Year.ToString("D4")}{dt.Month.ToString("D2")}{dt.Day.ToString("D2")}-{dt.Hour.ToString("D2")}{dt.Minute.ToString("D2")}{dt.Second.ToString("D2")}";
+            return timeStamp;
+        }
+
+        public void OutputDetectorInformation(string timeStamp)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    var sb = new StringBuilder();
+                    var sensors = runManager.TsmApi.Network.Sensors;
+                    sb.AppendLine("Sensor Id,IsActivated,LastActuationTime,Speed,IsOccupied,Occupancy");
+                    foreach (var s in sensors)
+                    {
+                        dynamic lastActuationTime = s.LastActuationTime.ToString();
+                        if (lastActuationTime.Contains("-")) lastActuationTime = string.Empty;
+                        var line = $"{s.id},{s.IsActivated},{lastActuationTime},{s.Speed},{s.IsOccupied},{s.Occupancy}";
+                        sb.AppendLine(line);
+                    }
+                    var filePath = $"Detectors-{timeStamp}.csv";
+                    File.WriteAllText(filePath, sb.ToString());
+                    MessageBox.Show("Detector information written successfully!");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"An error occurred while writing sensor information.\nDetails:{e.Message}");
+                }
+            });
         }
 
         public void StepForward(int stepSize = 1)
