@@ -139,9 +139,7 @@ namespace TsmManager
 
         private void getVehicleStatusButton_Click(object sender, EventArgs e)
         {
-            var dt = DateTime.Now;
-            //manager.OutputVehicleInformation(manager.GetTimeStamp(dt));
-            MessageBox.Show($"Vehicle information writing initiated at {dt}");
+            manager.GetVehicleInformation();
         }
 
         private void detectorIsActiveButton_Click(object sender, EventArgs e)

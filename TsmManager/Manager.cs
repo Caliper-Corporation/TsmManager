@@ -111,29 +111,16 @@ namespace TsmManager
             signal.TurnSignalState[(short)turn] = state;
         }
 
-        internal void OutputVehicleInformation(string timeStamp)
+        internal void GetVehicleInformation()
         {
             Task.Run(() =>
             {
-                try
+                var vehicles = runManager.TsmApi.Network.Vehicles;
+                foreach (var v in vehicles)
                 {
-                    var sb = new StringBuilder();
-                    var vehicles = runManager.TsmApi.Network.Vehicles;
-                    sb.AppendLine("Vehicle Id,Vehicle Class,Segment Id,Speed,Headway");
-                    foreach (var v in vehicles)
-                    {
-                        var speed = v.Speed > 0 ? v.Speed.ToString() : string.Empty;
-                        
-                        var line = $"{v.id},{v.Class},{v.Segment?.id},{speed},{v.Headway}";
-                        sb.AppendLine(line);
-                    }
-                    var filePath = $"Vehicles-{timeStamp}.csv";
-                    File.WriteAllText(filePath, sb.ToString());
-                    MessageBox.Show("Vehicle information written successfully!");
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show($"An error occurred while writing vehicle information.\nDetails:{e.Message}");
+                    //v is a COMObject and it has all the properties and functions described in the ITsmVehicle interface
+                    //To see the ITsmVehicle interface refer to Help > TransModeler API Help > Network Interface > Vehicles
+                    var speed = v.Speed > 0 ? v.Speed.ToString() : string.Empty;
                 }
             });
         }
