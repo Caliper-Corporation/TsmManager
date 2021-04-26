@@ -113,6 +113,24 @@ namespace TsmManager
 
         internal void GetVehicleInformation()
         {
+            try
+            {
+                dk.SetLayer("Nodes");
+                var id = 100; //node id
+                var pt = dk.GetPoint(id);
+                MessageBox.Show($"Node id 100, latitude = {pt.Lat} longitude = {pt.Lon}");
+
+                dk.SetLayer("Signals"); 
+                id = 305; //signal id
+                pt = dk.GetPoint(id);
+                MessageBox.Show($"Signal id 305, latitude = {pt.Lat} longitude = {pt.Lon}");
+            }
+            catch (Exception e)
+            {
+                //id not found error can be thrown
+                Console.WriteLine(e.Message);
+            }
+            
             Task.Run(() =>
             {
                 var vehicles = runManager.TsmApi.Network.Vehicles;
