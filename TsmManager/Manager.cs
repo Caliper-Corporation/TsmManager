@@ -118,12 +118,12 @@ namespace TsmManager
                 dk.SetLayer("Nodes");
                 var id = 100; //node id
                 var pt = dk.GetPoint(id);
-                MessageBox.Show($"Node id 100, latitude = {pt.Lat} longitude = {pt.Lon}");
+                Console.WriteLine($"Node id 100, latitude = {pt.Lat} longitude = {pt.Lon}");
 
                 dk.SetLayer("Signals"); 
                 id = 305; //signal id
                 pt = dk.GetPoint(id);
-                MessageBox.Show($"Signal id 305, latitude = {pt.Lat} longitude = {pt.Lon}");
+                Console.WriteLine($"Signal id 305, latitude = {pt.Lat} longitude = {pt.Lon}");
             }
             catch (Exception e)
             {
@@ -133,12 +133,14 @@ namespace TsmManager
             
             Task.Run(() =>
             {
+                dk.SetLayer("Vehicles");
                 var vehicles = runManager.TsmApi.Network.Vehicles;
                 foreach (var v in vehicles)
                 {
                     //v is a COMObject and it has all the properties and functions described in the ITsmVehicle interface
                     //To see the ITsmVehicle interface refer to Help > TransModeler API Help > Network Interface > Vehicles
-                    var speed = v.Speed > 0 ? v.Speed.ToString() : string.Empty;
+                    var pt = dk.GetPoint(v.id);
+                    Console.WriteLine($"Vehicle id {v.id}, latitude = {pt.Lat} longitude = {pt.Lon}");
                 }
             });
         }
